@@ -1,0 +1,70 @@
+.App {
+  text-align: center;
+}
+
+.Container {
+  background-color: blue;
+  height: 100vh;
+  padding: 5px;
+}
+
+.Header {
+  height: 40px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  border: 1px solid red;
+}
+
+.header_left_content {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  width: 60%;
+  height: 40px;
+  padding-left: 100px;
+  color: white;
+  font-size: large;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.header_left_content1 {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 40%;
+  height: 40px;
+  color: white;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.Prcing_tag {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  width: 200px;
+  height: 30px;
+  color: white;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.Request_demo {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  width: 200px;
+  height: 30px;
+  border: 1px solid white;
+  cursor: default;
+  color: white;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.Button {
+  padding: 20px;
+  color: #000;
+  width: 20%;
+  background-color: wheat;
+}
