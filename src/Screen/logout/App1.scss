@@ -6,6 +6,7 @@ $primary-color: blue;
 .logout_container {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   background-color: antiquewhite;
 }
 .Container_icon {
@@ -17,13 +18,14 @@ $primary-color: blue;
 }
 .Icon {
   padding-top: 20%;
-  padding-bottom: 20%;
+  padding-bottom: 25%;
   padding-left: 5%;
   padding-right: 5%;
 }
 .list_of_option_container {
   width: 100%;
   cursor: pointer;
+  margin-top: 10px;
   // border-top-left-radius: 2%;
   // border-top-right-radius: 2%;
   // border-bottom-left-radius: 2%;
@@ -64,7 +66,7 @@ $primary-color: blue;
 }
 .header_setting_container {
   background-color: rgb(197, 199, 197);
-  width: 90%;
+  width: 95%;
   height: auto;
 }
 .header_setting_content {
@@ -94,7 +96,7 @@ $primary-color: blue;
   // height: 92%;
 }
 .right_bottom_container {
-  width: 55%;
+  width: 45%;
   // height: auto;
   background-color: white;
   display: flex;

@@ -1,6 +1,7 @@
 import React,{useState, useEffect} from "react";
 import auth from "../../Router/auth";
 import './App1.scss';
+import Modal from '../../component/Modal';
 const App = [
   {
   id:1,
@@ -104,6 +105,14 @@ const AppLayout = props => {
 
     const [isvisible, setIsvisible] = useState(false);
     const [isvisiblesettings, setIsvisiblesettings] = useState('');
+    const [isshow, setIsshow] = useState(false);
+    const [ismodelshow, setIsmodelshow] = useState(false);
+    const [state, setState] = useState('');
+  const handleChanges = e => {
+    setState(e.target.value);
+  };
+
+
     // useEffect(() => {
     //     console.log('useEffect has been called!');
     //     setIsvisible(isvisible);
@@ -115,17 +124,24 @@ const AppLayout = props => {
       }
 
      const addphonenumber = () =>{
-         alert('hi');
+     setIsmodelshow(true);
      } 
      const handleChange = (item) =>{
         // alert(item.icon);
         setIsvisible(!isvisible);
         setIsvisiblesettings(item.icon)
       }
+
+     const showModal = () => {
+     setIsshow(true);
+      };
+     const onClose = () => {
+        setIsshow(false);
+      };
   return (
     <div className={'logout_container'}>
       {/* <h1>App Layout</h1> */}
-       <div className='Container_icon'>
+        <div className='Container_icon'>
            <div className='logo_style'>
                <img 
                alt={'hi'}
@@ -189,8 +205,35 @@ const AppLayout = props => {
            </div>
             
        </div>
-     
+        
+   {ismodelshow ?
+        <div style={{width:'100%',height:'100%',backgroundColor:'#E7DFDF',zIndex:100,position:'absolute', justifyContent:'center',display:'flex',flexDirection:'row',alignItems:'center',}}>
+        
+        
+        <div style={{width:300,backgroundColor:'white',height:200,borderRadius:10,overflow:'hidden',display:'flex',flexDirection:'column',alignItems:'flex-start',padding:5}}>
 
+                  <div style={{padding:5,fontWeight:'bold'}}>
+                      Add your number
+                  </div>
+               
+                  <div style={{padding:5,marginBottom:20}}>
+                      Enter your number
+                  </div>
+                  <input
+                  style={{marginBottom:50}}
+                  type="text" 
+                  value={state} 
+                 name={'firstname'}
+              onChange={handleChanges}
+                   />
+         {state}
+<div style={{display:"flex",flexDirection:'row',justifyContent:'space-between',alignItems:'center',alignSelf:'center',marginTop:10}}>
+<div style={{width:120,backgroundColor:'red',marginRight:5,borderRadius:5}}>back</div>
+<div  style={{width:100,backgroundColor:'red',borderRadius:5}}>call me</div>
+</div>
+                          </div>
+                      </div>
+:null}
         {/* <div className='button_conatier'>
           <button onClick={()=>{sayHello()}}>
         Click me
