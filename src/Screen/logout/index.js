@@ -1,7 +1,6 @@
 import React,{useState, useEffect} from "react";
 import auth from "../../Router/auth";
 import './App1.scss';
-import Modal from '../../component/Modal';
 const App = [
   {
   id:1,
@@ -101,55 +100,82 @@ const settinglist = [
 
 ]
 
+const Iconcontainer = props => {
+ return(
+    <div className='Container_icon'>
+    <div className='logo_style'>
+        <img 
+        alt={'hi'}
+        src={require('./chart_icon.svg')}
+        style={{ height: 50, width: 36 }}
+
+        />
+    </div>
+{props.children}         
+</div>
+ )
+}
+
+
 const AppLayout = props => {
 
     const [isvisible, setIsvisible] = useState(false);
     const [isvisiblesettings, setIsvisiblesettings] = useState('');
-    const [isshow, setIsshow] = useState(false);
     const [ismodelshow, setIsmodelshow] = useState(false);
-    const [state, setState] = useState('');
-  const handleChanges = e => {
-    setState(e.target.value);
-  };
+    const [isphonenumber, setIsphonenumber] = useState('');
+    const [ isphonearray,setIsphonearray]=useState([])
+    const [isphonecontainer, setIsphonecontainer] = useState(false);
+ 
+    const handlephonenumber = e => {
+    setIsphonenumber(e.target.value);
+   
 
+      };
 
-    // useEffect(() => {
-    //     console.log('useEffect has been called!');
-    //     setIsvisible(isvisible);
-    // },[isvisible]); 
-
-  const sayHello = () =>
-      { 
-     alert('Hello!');
-      }
-
+    const deletephonenumber = (phonenumber) => {
+   
+       let copyarray = isphonearray;
+        let newarray = copyarray.filter(item => {
+            return item.name != phonenumber
+          });
+        setIsphonearray(newarray);  
+    }
      const addphonenumber = () =>{
      setIsmodelshow(true);
      } 
+     const modalclose = () =>{
+         setIsmodelshow(false);
+         if(isphonenumber.length>0){
+         isphonearray.push(
+            {
+                id:isphonearray.length +1,
+                name:isphonenumber
+            }
+           )  
+           setIsphonearray(isphonearray)
+           console.log('ram',isphonearray)
+        }
+         setIsphonenumber('');
+
+     }
+
      const handleChange = (item) =>{
         // alert(item.icon);
         setIsvisible(!isvisible);
         setIsvisiblesettings(item.icon)
       }
+      const open_phonenumber_field = (name)=>{
+              if(name=='Dialer')
+              {
+               setIsphonecontainer(true)
+              }
+      }
 
-     const showModal = () => {
-     setIsshow(true);
-      };
-     const onClose = () => {
-        setIsshow(false);
-      };
   return (
     <div className={'logout_container'}>
       {/* <h1>App Layout</h1> */}
-        <div className='Container_icon'>
-           <div className='logo_style'>
-               <img 
-               alt={'hi'}
-               src={require('./chart_icon.svg')}
-               style={{ height: 50, width: 36 }}
- 
-               />
-           </div>
+
+      <Iconcontainer>
       {App.map((item,index)=>{
           return(
        <img alt={item.icon} src={item.path}
@@ -158,22 +184,24 @@ const AppLayout = props => {
        />
           )
       }) }
-                
-       </div>
-
-
+     </Iconcontainer>
+      
    
        <div className='header_setting_container'>
           <div className='header_setting_content'>
                   Settings dialer
           </div>
            <div className='header_setting_bottom'>
-              {isvisible &&  <div className='left_bottom_container'>
+              {isvisible && 
+               <div className='left_bottom_container'>
             
              <div className='list_of_option_container'>
                       {settinglist.map((item,index)=>{
                           return (
-                          <div className={'list_of_option'}>{item.name}</div>
+                          <div className={'list_of_option'}
+                          onClick={()=>{open_phonenumber_field(item.name)}}
+                          
+                          >{item.name}</div>
                           )
                       })
                            
@@ -184,60 +212,66 @@ const AppLayout = props => {
 
                  </div>
 
-    } 
-                 <div className='right_bottom_container'>
+                  } 
+              {isphonecontainer? 
+                <div className='right_bottom_container'>
                       <div className={'phone_number_heading'}>
-                          <div style={{width:'100%',textAlign:'start',padding:0,margin:0,justifyContent:'center',height:20}}>hi</div>
-                          <div style={{backgroundColor:'green',width:'40%',height:100,borderRadius:10,overflow:'hidden',justifyContent:'center',alignItems:'center',
-                          display:'flex',
-                        // boxShadow: 1, 3, 1, 'red',
-                        cursor:'pointer',
-                    marginTop:-30
-                        }}
-                        onClick={()=>{addphonenumber()}}
-                        
+                          <div className={'phone_number_content'}>My phone number</div>
+                          <div 
+                          className='phonenumber_container'
+                        onClick={()=>{addphonenumber()}}   
                         >
                                   + Add a phone number
                           </div>
+
+                          {
+                              isphonearray && isphonearray.length>0?
+                              isphonearray.map((item)=>{
+             return(
+             <div
+             
+             className='phonenumber_container'
+                       onClick={()=>{deletephonenumber(item.name)}}
+                       >
+                           {item.name}
+                       </div>
+                     )
+                              }):null
+                          }
                       </div>
                      
                  </div>
+                 :null}
            </div>
             
        </div>
         
    {ismodelshow ?
-        <div style={{width:'100%',height:'100%',backgroundColor:'#E7DFDF',zIndex:100,position:'absolute', justifyContent:'center',display:'flex',flexDirection:'row',alignItems:'center',}}>
-        
-        
-        <div style={{width:300,backgroundColor:'white',height:200,borderRadius:10,overflow:'hidden',display:'flex',flexDirection:'column',alignItems:'flex-start',padding:5}}>
-
+        <div className='model_container'>
+        <div className='modelwrapper'>
                   <div style={{padding:5,fontWeight:'bold'}}>
                       Add your number
                   </div>
-               
                   <div style={{padding:5,marginBottom:20}}>
                       Enter your number
                   </div>
                   <input
                   style={{marginBottom:50}}
                   type="text" 
-                  value={state} 
-                 name={'firstname'}
-              onChange={handleChanges}
+                  value={isphonenumber} 
+                  name={'firstname'}
+                  onChange={handlephonenumber}
                    />
-         {state}
-<div style={{display:"flex",flexDirection:'row',justifyContent:'space-between',alignItems:'center',alignSelf:'center',marginTop:10}}>
-<div style={{width:120,backgroundColor:'red',marginRight:5,borderRadius:5}}>back</div>
-<div  style={{width:100,backgroundColor:'red',borderRadius:5}}>call me</div>
-</div>
+    <div className={'model_bottom_container'}>
+     <div style={{width:120,backgroundColor:'red',marginRight:5,borderRadius:5,cursor:'pointer'}}
+     onClick={()=>{modalclose()}}
+     >save</div>
+     <div  style={{width:100,backgroundColor:'red',borderRadius:5}}>call me</div>
+    </div>
                           </div>
                       </div>
-:null}
-        {/* <div className='button_conatier'>
-          <button onClick={()=>{sayHello()}}>
-        Click me
-      </button> */}
+     :null}
+       
     
 
 
@@ -246,7 +280,8 @@ const AppLayout = props => {
 
 
 
-      {/* <button
+       <button
+       style={{width:'20%',justifyContent:'center',marginLeft:20,marginTop:10}}
         onClick={() => {
             auth.logout(() => {
                 props.history.push("/");
@@ -255,7 +290,6 @@ const AppLayout = props => {
       >
         Logout
       </button>
-      </div> */}
     </div>
   );
 };
