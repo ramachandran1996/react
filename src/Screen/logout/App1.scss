@@ -1,0 +1,116 @@
+$primary-color: blue;
+
+.App {
+  text-align: center;
+}
+.logout_container {
+  display: flex;
+  flex-direction: row;
+  background-color: antiquewhite;
+}
+.Container_icon {
+  background-color:blue;
+  display: flex;
+  flex-direction: column;
+  width: 5%;
+  height: 100%;
+}
+.Icon {
+  padding-top: 20%;
+  padding-bottom: 20%;
+  padding-left: 5%;
+  padding-right: 5%;
+}
+.list_of_option_container {
+  width: 100%;
+  cursor: pointer;
+  // border-top-left-radius: 2%;
+  // border-top-right-radius: 2%;
+  // border-bottom-left-radius: 2%;
+  // border-bottom-right-radius: 2%;
+  border-radius: 3%;
+  height: 100%;
+  overflow: hidden;
+  background-color:rgb(197, 199, 197);
+}
+.list_of_option {
+  // width: 100%;
+  padding: 5.2%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  // border-bottom-color:red ;
+  border-bottom-width: 2%;
+  margin-bottom: 0.5%;
+  // overflow: hidden;
+  background-color:white;
+}
+.list_of_option_1 {
+  border-top-left-radius: 20%;
+  border-bottom-color:red ;
+  padding: 5%;
+  margin-bottom: 0.5%;
+}
+.button_conatier {
+  // width: 40%;
+}
+.logo_style {
+  padding-top: 20%;
+  padding-bottom: 60%;
+}
+.Icon_padding {
+   padding-bottom: 75%;
+   padding-top: 25%;
+}
+.header_setting_container {
+  background-color: rgb(197, 199, 197);
+  width: 90%;
+  height: auto;
+}
+.header_setting_content {
+  background-color: red;
+  height: 10%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  // justify-content: center;
+  align-items: center;
+  text-align: start;
+  // margin-bottom:5% ;
+}
+.header_setting_bottom {
+  display: flex;
+  flex-direction: row;
+  height: 83%;
+  margin-top: 2%;
+  justify-content: space-evenly;
+}
+.left_bottom_container {
+  width: 40%;
+  // height:auto ;
+  background-color: white;
+  border-radius: 3%;
+  overflow: hidden;
+  // height: 92%;
+}
+.right_bottom_container {
+  width: 55%;
+  // height: auto;
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  padding: 5%;
+}
+.phone_number_heading {
+  font-size: large;
+  font-weight: bold;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  padding: 5px;
+  height: 200px;
+  background-color: red;
+}
