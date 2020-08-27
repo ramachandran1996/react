@@ -94,7 +94,7 @@ const settinglist = [
         name:'Autobox'
     },
     {
-        id:8,
+        id:9,
         name:'Billing'
     },
 
@@ -106,8 +106,8 @@ const Iconcontainer = props => {
     <div className='logo_style'>
         <img 
         alt={'hi'}
-        src={require('./chart_icon.svg')}
-        style={{ height: 50, width: 36 }}
+        src={require('./logo.png')}
+        style={{ height: 36, width: 36 }}
 
         />
     </div>
@@ -143,9 +143,10 @@ const AppLayout = props => {
      const addphonenumber = () =>{
      setIsmodelshow(true);
      } 
-     const modalclose = () =>{
+     const modalclose = (value) =>{
+         console.log('ramachandran',value);
          setIsmodelshow(false);
-         if(isphonenumber.length>0){
+         if(isphonenumber.length>0 && value !=''){
          isphonearray.push(
             {
                 id:isphonearray.length +1,
@@ -189,7 +190,7 @@ const AppLayout = props => {
    
        <div className='header_setting_container'>
           <div className='header_setting_content'>
-                  Settings dialer
+                 <p style={{color:'#1B73E8',marginRight:10}}>Settings /</p> dialer
           </div>
            <div className='header_setting_bottom'>
               {isvisible && 
@@ -201,7 +202,9 @@ const AppLayout = props => {
                           <div className={'list_of_option'}
                           onClick={()=>{open_phonenumber_field(item.name)}}
                           
-                          >{item.name}</div>
+                          >
+                              <div style={{backgroundColor:'white',padding:'5%',width:'100%',textAlign:"left",marginBottom:item.id=='9'?0:2,fontSize:16,fontFamily:'sans-serif'}}> {item.name}</div>
+                             </div>
                           )
                       })
                            
@@ -218,10 +221,10 @@ const AppLayout = props => {
                       <div className={'phone_number_heading'}>
                           <div className={'phone_number_content'}>My phone number</div>
                           <div 
-                          className='phonenumber_container'
+                          className='add_phone_number_container'
                         onClick={()=>{addphonenumber()}}   
                         >
-                                  + Add a phone number
+                                 <p style={{color:'#1B73E8'}}>+ Add a phone number</p> 
                           </div>
 
                           {
@@ -230,16 +233,89 @@ const AppLayout = props => {
              return(
              <div
              
-             className='phonenumber_container'
-                       onClick={()=>{deletephonenumber(item.name)}}
+             className='add_phone_number_container'
+            //  style={{backgroundColor:'red',display:'flex',flexDirection:'row',flexWrap:'wrap',height:100,width:'25%',marginTop:10,marginBottom:10,marginRight:5,paddingLeft:10,paddingRight:10,justifyContent:'center',alignItems:'center'}}
+                     
                        >
-                           {item.name}
+                     <div className='add_phone_number_top_field'>
+                         <div 
+                         className='phone_icon_container'
+                         >
+                         <img 
+                         alt={'call'}
+                         src={require('./call-icon.svg')}
+                         style={{width:20,height:20}}
+                         />
+                         </div>
+                         <div 
+                         className="phone_number_field_conatienr"
+                         >
+             <p style={{color:'#1B73E8',display:"contents"}}>{item.name}</p>
+                             
+                             </div>
+                         <div 
+                         className="star_conatiner"
+                         >
+                         <img 
+                         alt={'star'}
+                         src={require('./star.svg')}
+                         style={{width:20,height:20,paddingLeft:20}}
+                         />
+
+                         </div>
+                      </div>
+                      <div 
+                      className={'add_phone_number_bottom_field'}>
+                      <div style={{width:'50%',height:20,}}>
+                              ownnumber
+                              </div>
+                              <div>
+                              <img 
+                                  onClick={()=>{deletephonenumber(item.name)}}
+                         src={require('./delete-icon.svg')}
+                         style={{width:20,height:20}}
+                         />
+                              </div>
+                      </div>
                        </div>
                      )
                               }):null
                           }
                       </div>
                      
+
+                     <div className='phone_number_heading'>
+                     <div className={'phone_number_content'}>Phone call credits</div>
+                     <div
+             
+             className='add_phone_number_container'>
+
+                 <div style={{   
+                      width: '100%',
+                      textAlign:'left',
+                      display:'block',
+                      height: 20,
+                      marginBottom: 10,
+                      marginTop: 6,
+                      fontWeight:'lighter'
+                      
+                  
+                      }}>Available</div>
+                 <div style={{
+     width: '100%',
+    textAlign:'left',
+    display:'block',
+    height: 20,
+    fontWeight:'lighter'
+    // marginTop:-30
+    }}>$100</div>
+
+    <div>
+       <p style={{color:'#1B73E8',display:'contents'}}> Buy more credits</p>
+        </div>
+                 </div>
+                 
+                         </div>
                  </div>
                  :null}
            </div>
@@ -249,24 +325,39 @@ const AppLayout = props => {
    {ismodelshow ?
         <div className='model_container'>
         <div className='modelwrapper'>
-                  <div style={{padding:5,fontWeight:'bold'}}>
+            <div style={{position:'relative',
+            right:'0%',top:'1%',
+            textAlign:'end',
+            marginTop:-10,
+    }}>
+                <img 
+                                  onClick={()=>{modalclose('')}}
+                         src={require('./close_icon.svg')}
+                         style={{width:20,height:20}}
+                         />
+            
+                </div>
+                  <div style={{padding:5,fontWeight:'bold',fontSize:22,textAlign:'left'}}>
                       Add your number
                   </div>
-                  <div style={{padding:5,marginBottom:20}}>
+                  <div style={{padding:5,marginBottom:20,textAlign:'left'}}>
                       Enter your number
                   </div>
                   <input
-                  style={{marginBottom:50}}
+                  style={{marginBottom:5,outline:'none',borderWidth:0,borderBottomWidth:0.5,marginLeft:6,marginRight:6}}
                   type="text" 
                   value={isphonenumber} 
                   name={'firstname'}
                   onChange={handlephonenumber}
                    />
+                       <div style={{padding:5,marginBottom:5,textAlign:'left'}}>
+                      Well call you to enter a verification code
+                  </div>
     <div className={'model_bottom_container'}>
-     <div style={{width:120,backgroundColor:'red',marginRight:5,borderRadius:5,cursor:'pointer'}}
+     <div style={{width:100,backgroundColor:'whitesmoke',marginRight:5,borderRadius:5,height:20,cursor:'pointer',padding:5}}
      onClick={()=>{modalclose()}}
-     >save</div>
-     <div  style={{width:100,backgroundColor:'red',borderRadius:5}}>call me</div>
+     >Back</div>
+     <div  style={{width:100,backgroundColor:'#1B73E8',borderRadius:5,height:20,padding:5}}>Call me</div>
     </div>
                           </div>
                       </div>
